@@ -1,4 +1,4 @@
-package com.cloudera.ds.svdbench
+package com.cloudera.ds.legallsa
 
 
 import org.apache.spark.SparkContext

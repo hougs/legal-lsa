@@ -1,4 +1,4 @@
-package com.cloudera.ds.svdbench
+package com.cloudera.ds.legallsa
 
 import java.nio.charset.StandardCharsets
 import java.nio.file.{Files, Paths}

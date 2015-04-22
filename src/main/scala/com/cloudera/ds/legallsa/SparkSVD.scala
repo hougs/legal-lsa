@@ -1,4 +1,4 @@
-package com.cloudera.ds.svdbench
+package com.cloudera.ds.legallsa
 
 import com.quantifind.sumac.{ArgMain, FieldArgs}
 import org.apache.spark.mllib.linalg.distributed.RowMatrix
