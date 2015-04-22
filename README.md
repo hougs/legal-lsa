@@ -1,2 +1,2 @@
-# legal-lsa
-Latent Semantic Analysis of Legal Documents
+# Latent Semantic Analysis of Legal Documents
+
