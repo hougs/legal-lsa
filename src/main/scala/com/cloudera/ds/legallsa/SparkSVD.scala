@@ -25,12 +25,12 @@ object SparkSVD extends ArgMain[SVDArgs] {
 
   def main(args: SVDArgs): Unit = {
     val sc = new SparkContext(configure(args.master))
-    val matrix: RowMatrix = DataIO.readMahoutMatrix(args.inPath, sc)
-    val svd: SingularValueDecomposition[RowMatrix, Matrix] = matrix.computeSVD(args.rank,
+    val counts: RowMatrix = DataIO.read_matrix_input(sc, DataIO.count_path)
+    val svd: SingularValueDecomposition[RowMatrix, Matrix] = counts.computeSVD(args.rank,
       computeU = true)
     // Write out svd to files.
-    val u = DataIO.writeSparkMatrix(args.outUPath, svd.U)
-    val s =  DataIO.writeSparkVector(args.outSPath, svd.s)
-    val v = DataIO.writeSparkMatrix(args.outVPath, svd.V)
+    val count_u = DataIO.writeRowMatrix(args.outUPath, svd.U)
+    val count_s =  DataIO.writeSparkVector(args.outSPath, svd.s)
+    val count_v = DataIO.writeSparkMatrix(args.outVPath, svd.V)
   }
 }

@@ -9,10 +9,12 @@ import org.apache.spark.mllib.linalg.{Vectors, Matrix, Vector}
 import org.apache.spark.rdd.RDD
 
 object DataIO {
-  val raw_count_path = "hdfs:///user/juliet/legallsa/Word_stats_MACs_0708.csv"
-  val tfidf_path = "hdfs:///user/juliet/legallsa/Word_stats_MACs_0708_TF-IDF.csv"
+  val count_path = "hdfs:///user/juliet/legallsa/count.csv"
+  val count_header_path = "hdfs:///user/juliet/legallsa/count-header.csv"
+  val tfidf_path = "hdfs:///user/juliet/legallsa/tfidf.csv"
+  val tfidf_header_path = "hdfs:///user/juliet/legallsa/tfidf-header.csv"
 
-  def read_marix_input(sc: SparkContext, path: String): RowMatrix = {
+  def read_matrix_input(sc: SparkContext, path: String): RowMatrix = {
     val lines: RDD[String] = sc.textFile(path)
     val header = lines.first()
     val vectors = lines.map{ line =>
@@ -23,6 +25,7 @@ object DataIO {
       tuple._1 != 0.0).map(tuple => (tuple._2, tuple._1)).toSeq
       Vectors.sparse(word_arr.length, nonzeroElems)
     }
+    vectors.cache()
     new RowMatrix(vectors)
   }
 
@@ -32,6 +35,12 @@ object DataIO {
     val colLength = matrix.numRows
     val csvMatrix = matrix.toArray.grouped(colLength).map(column => column.mkString(",")).mkString("\n")
     Files.write(Paths.get(path), csvMatrix.getBytes(StandardCharsets.UTF_8))
+  }
+
+  def writeRowMatrix(path: String, rowMatrix: RowMatrix) = {
+    rowMatrix.rows.map{ vector =>
+      vector.toArray.map(_.toString).mkString(",")
+    }.saveAsTextFile(path)
   }
 
   /** Writes a spark vector to a UTF-8 encoded csv file. */

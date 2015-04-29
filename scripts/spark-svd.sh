@@ -7,10 +7,10 @@
 # Where inputPath and outUPath are paths in hdfs, outSPath and outVPath are local paths, and
 # master is a URL for a Spark master.
 
-INPUT_PATH=$1
-OUT_U=$2
-OUT_S=$3
-OUT_V=$4
+COUNT_PATH=hdfs:///user/juliet/legallsa/count.csv
+COUNT_U=hdfs:///user/juliet/legallsa/out/count-u.csv
+COUNT_S=hdfs:///user/juliet/legallsa/out/count-s.csv
+COUNT_V=hdfs:///user/juliet/legallsa/out/count-v.csv
 MASTER=$5
 RANK=$6
 
@@ -22,4 +22,4 @@ $SPARK_HOME/bin/spark-submit --class com.cloudera.ds.svdbench.SparkSVD \
   --master $MASTER --executor-memory 14g --executor-cores 5 --num-executors 18 \
   --driver-class-path ./target/svd-benchmark-0.0.1-SNAPSHOT-jar-with-dependencies.jar \
   ./target/svd-benchmark-0.0.1-SNAPSHOT-jar-with-dependencies.jar \
-  --inPath $INPUT_PATH --outUPath $OUT_U --outSPath $OUT_S --outVPath $OUT_V --rank $RANK
+  --inPath $COUNT_PATH --outUPath $COUNT_U --outSPath $COUNT_S --outVPath $COUNT_V --rank $RANK
