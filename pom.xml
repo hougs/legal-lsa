@@ -157,6 +157,11 @@ License.
             <artifactId>sumac_2.10</artifactId>
             <version>0.3.0</version>
         </dependency>
+      <dependency>
+        <groupId>com.cloudera.datascience</groupId>
+        <artifactId>ch06-lsa</artifactId>
+        <version>1.0.0</version>
+      </dependency>
         <!-- test dependencies -->
         <dependency>
             <groupId>org.hamcrest</groupId>

@@ -29,6 +29,11 @@ object DataIO {
     new RowMatrix(vectors)
   }
 
+  def readHeader(sc: SparkContext, path: String): Seq[String] = {
+    val header = sc.textFile(path)
+    header.flatMap(_.split(",")).collect()
+  }
+
 
   /** Writes a Spark matrix to a UTF-8 encoded csv file. */
   def writeSparkMatrix(path: String, matrix: Matrix) = {
