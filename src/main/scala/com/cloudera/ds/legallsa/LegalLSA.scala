@@ -8,13 +8,14 @@ import org.apache.spark.{SparkConf, SparkContext}
 
 class LSAArgs extends FieldArgs {
   var matrixPath = ""
+  var headerPath = ""
+  var conceptTermPath = ""
   var outUPath = ""
   var outSPath = ""
   var outVPath = ""
   var master = "yarn-client"
   var rank = 20
-  var headerPath = ""
-  var conceptTermPath = ""
+
 }
 
 object LegalLSA extends ArgMain[LSAArgs] {
