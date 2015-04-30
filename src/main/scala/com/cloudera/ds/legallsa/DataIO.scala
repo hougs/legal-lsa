@@ -1,11 +1,8 @@
 package com.cloudera.ds.legallsa
 
-import java.nio.charset.StandardCharsets
-import java.nio.file.{Files, Paths}
-
 import org.apache.spark.SparkContext
 import org.apache.spark.mllib.linalg.distributed.RowMatrix
-import org.apache.spark.mllib.linalg.{Vectors, Matrix, Vector}
+import org.apache.spark.mllib.linalg.{Matrix, Vector, Vectors}
 import org.apache.spark.rdd.RDD
 
 object DataIO {
@@ -37,12 +34,11 @@ object DataIO {
 
 
   /** Writes a Spark matrix to a UTF-8 encoded csv file. */
-  def writeSparkMatrix(path: String, matrix: Matrix) = {
+  def writeSparkMatrix(path: String, matrix: Matrix, sc: SparkContext) = {
     val colLength = matrix.numRows
     val csvMatrix = matrix.toArray.grouped(colLength).map(column => column.mkString(",")).mkString("\n")
-    Files.write(Paths.get(path), csvMatrix.getBytes(StandardCharsets.UTF_8))
-  }
-
+    sc.parallelize(csvMatrix).saveAsTextFile(path)
+}
   def writeRowMatrix(path: String, rowMatrix: RowMatrix) = {
     rowMatrix.rows.map{ vector =>
       vector.toArray.map(_.toString).mkString(",")
@@ -50,7 +46,7 @@ object DataIO {
   }
 
   /** Writes a spark vector to a UTF-8 encoded csv file. */
-  def writeSparkVector(path: String, vector: Vector) = {
-    Files.write(Paths.get(path), vector.toArray.mkString(",").getBytes(StandardCharsets.UTF_8))
+  def writeSparkVector(path: String, vector: Vector, sc: SparkContext) = {
+    sc.parallelize(vector.toArray.mkString(",")).saveAsTextFile(path)
   }
 }
