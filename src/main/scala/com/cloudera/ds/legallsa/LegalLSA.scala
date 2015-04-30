@@ -6,7 +6,7 @@ import org.apache.spark.mllib.linalg.distributed.RowMatrix
 import org.apache.spark.mllib.linalg.{Matrix, SingularValueDecomposition}
 import org.apache.spark.{SparkConf, SparkContext}
 
-class SVDArgs extends FieldArgs {
+class LSAArgs extends FieldArgs {
   var matrixPath = ""
   var outUPath = ""
   var outSPath = ""
@@ -14,18 +14,20 @@ class SVDArgs extends FieldArgs {
   var master = "yarn-client"
   var rank = 20
   var headerPath = ""
+  var conceptTermPath = ""
 }
 
-object LegalLSA extends ArgMain[SVDArgs] {
+object LegalLSA extends ArgMain[LSAArgs] {
   /** Configure our Spark Context. */
   def configure(master: String): SparkConf = {
     val conf = new SparkConf()
     conf.setMaster(master)
+    conf.set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
     conf.setAppName("Legal SVD")
     conf
   }
 
-  def main(args: SVDArgs): Unit = {
+  def main(args: LSAArgs): Unit = {
     val sc = new SparkContext(configure(args.master))
     val counts: RowMatrix = DataIO.read_matrix_input(sc, DataIO.count_path)
     val svd: SingularValueDecomposition[RowMatrix, Matrix] = counts.computeSVD(args.rank,
@@ -35,13 +37,13 @@ object LegalLSA extends ArgMain[SVDArgs] {
     val count_s =  DataIO.writeSparkVector(args.outSPath, svd.s)
     val count_v = DataIO.writeSparkMatrix(args.outVPath, svd.V)
 
-    val termIds: Map[Int, String] = sc.textFile(args.headerPath, )
-
-    println("Singular values: " + svd.s)
+    val termIds: Map[Int, String] = DataIO.readHeader(sc, args.headerPath)
+    var conceptTerms = new StringBuilder
+    conceptTerms ++= "Singular values: " + svd.s
     val topConceptTerms = RunLSA.topTermsInTopConcepts(svd, 10, 10, termIds)
     for (terms <- topConceptTerms) {
-      println("Concept terms: " + terms.map(_._1).mkString(", "))
-      println()
+      conceptTerms ++= "Concept terms: " + terms.map(_._1).mkString(", ") + "\n"
     }
+    sc.parallelize(conceptTerms).saveAsTextFile(args.conceptTermPath)
   }
 }

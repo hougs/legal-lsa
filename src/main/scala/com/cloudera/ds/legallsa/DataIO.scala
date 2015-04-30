@@ -29,9 +29,10 @@ object DataIO {
     new RowMatrix(vectors)
   }
 
-  def readHeader(sc: SparkContext, path: String): Seq[String] = {
+  def readHeader(sc: SparkContext, path: String): Map[Int, String] = {
     val header = sc.textFile(path)
-    header.flatMap(_.split(",")).collect()
+    val terms = header.flatMap(_.split(",")).collect()
+    terms.zipWithIndex.map(_.swap).toMap
   }
 
 
