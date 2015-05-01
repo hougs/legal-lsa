@@ -25,7 +25,7 @@ $SPARK_HOME/bin/spark-submit --class com.cloudera.ds.legallsa.LegalLSA \
   --master $MASTER --executor-memory 14g --executor-cores 5 --num-executors 18 \
   --driver-class-path ./legal-lsa-0.0.1-SNAPSHOT-jar-with-dependencies.jar \
   ./legal-lsa-0.0.1-SNAPSHOT-jar-with-dependencies.jar \
-  --matrixPath $COUNT_PATH --headerPath $COUNT_HEADER_PATH --outUPath $COUNT_U --outSPath $COUNT_S
+  --matrixPath $COUNT_PATH --headerPath $COUNT_HEADER_PATH --outUPath $COUNT_U --outSPath $COUNT_S \
   --outVPath $COUNT_V --conceptTermPath $COUNT_CT_PATH --rank $RANK
 
 $SPARK_HOME/bin/spark-submit --class com.cloudera.ds.legallsa.LegalLSA \
@@ -33,6 +33,6 @@ $SPARK_HOME/bin/spark-submit --class com.cloudera.ds.legallsa.LegalLSA \
   --master $MASTER --executor-memory 14g --executor-cores 5 --num-executors 18 \
   --driver-class-path ./legal-lsa-0.0.1-SNAPSHOT-jar-with-dependencies.jar \
   ./legal-lsa-0.0.1-SNAPSHOT-jar-with-dependencies.jar \
-  --matrixPath $TFIDF_PATH --headerPath $TFIDF_HEADER_PATH --outUPath $TFIDF_U --outSPath $TFIDF_S
+  --matrixPath $TFIDF_PATH --headerPath $TFIDF_HEADER_PATH --outUPath $TFIDF_U --outSPath $TFIDF_S \
   --outVPath $TFIDF_V --conceptTermPath $TFIDF_CT_PATH --rank $RANK
 
