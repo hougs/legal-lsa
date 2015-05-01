@@ -1,0 +1,10 @@
+Singular values: [1270.0202136364514,624.8776196662162,123.6362749039065,107.74034250695708,93.71954001296336,86.97572875942308,78.49985420555986,77.37164136315847,75.0780201586493,70.74846098237593,66.46585547718811,64.78427046665742,64.65497828415623,61.374660561026616,60.41385829426433,59.543100908188656,57.13549737203232,56.77523201860353,56.03506381790194,54.5441076386989,53.46360075579738,52.05343258617645,51.74868167933908,51.356822171577946,49.94762732615486,49.78275512583583,48.29224935887901,47.876068027705415,47.22217823872253,47.019253816461564,45.92946787976406,45.022137581044845,44.74842996590338,43.76533482562433,43.20046872263269,42.734907051076675,42.15401659361978,41.71512232135999,41.41832566995354,41.12672165910899]Concept terms: liabilities_of_the_, of_operations_condition_, event_occurrence_development_, otherwise_assets_or_, any_subsidiaries_, subsidiaries_of_such_, any_subsidiaries_of_, such_person_taken_, person_and_any_, and_any_subsidiaries_
+Concept terms: e_, t_, n_, r_, o_, e_r_, l_, i_n_, m_, t_h_
+Concept terms: company_, the_company_, of_the_company_, the_company_and_, company_and_, the_, any_, company_subsidiaries_, the_company_subsidiaries_, and_the_company_
+Concept terms: of_, any_, of_the_, this_, its_, or_any_, not_, of_the_company_, its_subsidiaries_, company_
+Concept terms: diamond_, a_, impact_, diamond_material_, the_diamond_, diamond_material_adverse_, such_changes_, shall_, adverse_, diamond_and_
+Concept terms: such_, its_, its_subsidiaries_, this_, this_agreement_, any_, and_its_, and_its_subsidiaries_, party_, person_
+Concept terms: in_, other_, its_, its_subsidiaries_, taken_, and_its_subsidiaries_, conditions_, be_, and_its_, industries_
+Concept terms: to_, company_, to_the_, changes_, extent_, the_extent_, to_the_extent_, facts_, the_company_, effect_
+Concept terms: any_, to_, such_, taken_, person_, be_, from_, such_person_, not_, or_any_
+Concept terms: such_, that_, effect_, change_, person_, such_person_, to_, a_, event_, provided_
